@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// Sample programming languages with default topics
 const programming_languages = [
   {
     name: 'JavaScript',
@@ -39,9 +40,10 @@ const programming_languages = [
 
 const StudentDashboard = () => {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState({});
+  const [progress, setProgress] = useState({}); // store topic progress
   const studentName = 'Raj Agarwal';
 
+  // Update topic field (file/status) for a specific language and topic
   const updateStatus = (lang, topicIndex, field, value) => {
     setProgress((prev) => {
       const updatedLang = [...(prev[lang] || programming_languages.find(l => l.name === lang).topics)];
@@ -56,6 +58,7 @@ const StudentDashboard = () => {
     });
   };
 
+  // Return color class based on status
   const statusColor = (status) => {
     switch (status) {
       case 'completed': return 'text-green-600';
@@ -66,11 +69,13 @@ const StudentDashboard = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
+      {/* Header with welcome message */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold">Student Dashboard</h2>
         <div className="text-right text-lg font-medium text-gray-700">Welcome, {studentName}</div>
       </div>
 
+      {/* Language cards with topics */}
       <div className="space-y-6">
         {programming_languages.sort((a, b) => a.name.localeCompare(b.name)).map(({ name, topics }) => (
           <div key={name} className="bg-white shadow-md rounded-lg p-4">
@@ -78,11 +83,13 @@ const StudentDashboard = () => {
             <ul className="space-y-4">
               {(progress[name] || topics).map((topic, index) => (
                 <li key={topic.name} className="p-4 border rounded-md bg-gray-50">
+                  {/* Topic Info */}
                   <div className={`font-semibold ${statusColor(topic.status)}`}>{topic.name}</div>
                   <p className="text-sm text-gray-600 mt-1">{topic.description}</p>
                   <p className="text-sm text-gray-600">Example: {topic.example}</p>
                   <p className="text-sm text-gray-600 mb-2">Question: {topic.question}</p>
 
+                  {/* File upload */}
                   <div className="flex items-center space-x-2 mb-2">
                     <input
                       type="file"
@@ -92,6 +99,7 @@ const StudentDashboard = () => {
                     {topic.file && <span className="text-sm text-gray-600">Uploaded: {topic.file.name}</span>}
                   </div>
 
+                  {/* Status controls */}
                   <div className="flex space-x-2">
                     <select
                       value={topic.status}
@@ -102,6 +110,8 @@ const StudentDashboard = () => {
                       <option value="pending">Pending</option>
                       <option value="completed">Completed</option>
                     </select>
+
+                    {/* Reset buttons */}
                     <button
                       onClick={() => updateStatus(name, index, 'file', null)}
                       className="text-red-500 text-sm underline"
@@ -122,6 +132,7 @@ const StudentDashboard = () => {
         ))}
       </div>
 
+      {/* Logout button */}
       <div className="mt-8 text-center">
         <button
           onClick={() => navigate('/studentlogout')}
