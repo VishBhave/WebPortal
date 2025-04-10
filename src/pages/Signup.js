@@ -28,7 +28,7 @@ export default function Signup() {
         {/* Conditional form fields based on user type */}
         {user_type === 'student' ? (
           <>
-            <input placeholder="Email" required className="w-full p-2 border rounded" />
+            <input placeholder="Email" required type='email' className="w-full p-2 border rounded" />
             <input placeholder="Password" required type="password" className="w-full p-2 border rounded" />
             <input placeholder="Username" required className="w-full p-2 border rounded" />
             <input placeholder="Date of Birth" required type="date" className="w-full p-2 border rounded" />
@@ -45,11 +45,11 @@ export default function Signup() {
           </>
         ) : (
           <>
-            <input placeholder="Email" required className="w-full p-2 border rounded" />
+            <input placeholder="Email" required type='email' className="w-full p-2 border rounded" />
             <input placeholder="Password" required type="password" className="w-full p-2 border rounded" />
             <input placeholder="Username" required className="w-full p-2 border rounded" />
             <input placeholder="Company Name" required className="w-full p-2 border rounded" />
-            <input placeholder="Contact Number" required className="w-full p-2 border rounded" />
+            <input placeholder="Contact Number" required type='number' className="w-full p-2 border rounded" />
           </>
         )}
 
